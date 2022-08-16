@@ -51,7 +51,6 @@ def rook(board: int) -> int:
         h <<= 8
     kV = board
     while v < MAX:
-        print(v)
         if v & kV != 0:
             mask = mask | v
         v <<= 1
