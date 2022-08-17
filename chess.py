@@ -44,14 +44,12 @@ def rook(board: int) -> int:
     mask = 0
     v = 0x0101010101010101
     h = 0xff
-    kH = board
     while h < MAX:
-        if h & kH != 0:
+        if h & board != 0:
             mask = mask | h
         h <<= 8
-    kV = board
     while v < MAX:
-        if v & kV != 0:
+        if v & board != 0:
             mask = mask | v
         v <<= 1
     return (mask ^ board) & MAX
