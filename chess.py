@@ -72,10 +72,10 @@ def elephant(board: int) -> int:
         rK = rD if i == 0\
                 else (rK & noA) >> 1 if i < 0\
                 else (rK & noH) << 1
-        if rK & board != 0:
-            mask |= rK
         if lK & board != 0:            
             mask |= lK
+        if rK & board != 0:
+            mask |= rK
 
     return (mask ^ board) & MAX
 
