@@ -57,20 +57,26 @@ def rook(board: int) -> int:
 
 def elephant(board: int) -> int:
     '''Слон'''
+    lD = 0x102040810204080
+    rD = 0x8040201008040201
+    noA = 0xfefefefefefefefe
+    noH = 0x7f7f7f7f7f7f7f7f
+
     mask = 0
-    l = 0
-    r = 0
-    dl = 1
-    dr = 0x80
-    for i in range(15):
-        l = (l << 8) + (dl & 0xff)
-        r = (r << 8) + dr
-        dl <<= 1
-        dr >>= 1
-        if l & board != 0:
-            mask |= l
-        if r & board != 0:
-            mask |= r
+    lK = lD
+    rK = rD
+    for i in range(-7, 8):
+        if i == 0:
+            lK = lD
+            rK = rD
+        else:
+            lK = (lK & noA) >> 1 if i < 0 else (lK & noH) << 1
+            rK = (rK & noA) >> 1 if i < 0 else (rK & noH) << 1
+        if rK & board != 0:
+            mask |= rK
+        if lK & board != 0:            
+            mask |= lK
+
     return (mask ^ board) & MAX
 
 
