@@ -66,12 +66,12 @@ def elephant(board: int) -> int:
     lK = lD
     rK = rD
     for i in range(-7, 8):
-        if i == 0:
-            lK = lD
-            rK = rD
-        else:
-            lK = (lK & noA) >> 1 if i < 0 else (lK & noH) << 1
-            rK = (rK & noA) >> 1 if i < 0 else (rK & noH) << 1
+        lK = lD if i == 0\
+                else (lK & noA) >> 1 if i < 0\
+                else (lK & noH) << 1
+        rK = rD if i == 0\
+                else (rK & noA) >> 1 if i < 0\
+                else (rK & noH) << 1
         if rK & board != 0:
             mask |= rK
         if lK & board != 0:            
