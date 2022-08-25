@@ -83,3 +83,21 @@ def elephant(board: int) -> int:
 def queen(pos: int):
     '''Ферзь'''
     return rook(pos) | elephant(pos)
+
+
+def single_rook(pos: int) -> int:
+    '''Ладья'''
+    v = 0x0101010101010101
+    h = 0xff
+    return v << pos % 8 ^ h << pos // 8 * 8
+
+
+def single_elephant(pos: int) -> int:
+    '''Слон'''
+    lD = 0x8040201008040201
+    rD = 0x102040810204080
+    dl = pos % 8 - pos // 8
+    dr = (7 - pos // 8) - pos % 8
+    return ((lD if dl == 0 else lD << -dl * 8 if dl < 0 else lD >> dl * 8) ^ 
+            (rD if dr == 0 else rD << -dr * 8 if dr < 0 else rD >> dr * 8)) & MAX
+
