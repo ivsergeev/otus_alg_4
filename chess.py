@@ -94,7 +94,7 @@ def single_rook(pos: int) -> int:
 
 def single_elephant(pos: int) -> int:
     '''Слон'''
-    def shift(value: int, offset: int):
+    def shift(value: int, offset: int) -> int:
         return value if offset == 0 else \
                value << -offset if offset < 0 else \
                value >> offset
