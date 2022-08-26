@@ -87,9 +87,7 @@ def queen(pos: int):
 
 def single_rook(pos: int) -> int:
     '''Ладья'''
-    v = 0x0101010101010101
-    h = 0xff
-    return v << pos % 8 ^ h << pos // 8 * 8
+    return 0x0101010101010101 << pos % 8 ^ 0xff << (pos // 8 << 3)
 
 
 def single_elephant(pos: int) -> int:
