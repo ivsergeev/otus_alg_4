@@ -94,10 +94,9 @@ def single_rook(pos: int) -> int:
 
 def single_elephant(pos: int) -> int:
     '''Слон'''
-    lD = 0x8040201008040201
-    rD = 0x102040810204080
-    dl = (pos % 8 - pos // 8) << 3
-    dr = ((7 - pos // 8) - pos % 8) << 3
-    return ((lD if dl == 0 else lD << -dl if dl < 0 else lD >> dl) ^ 
-            (rD if dr == 0 else rD << -dr if dr < 0 else rD >> dr)) & MAX
-
+    def shift(value: int, offset: int):
+        return value if offset == 0 else \
+               value << -offset if offset < 0 else \
+               value >> offset
+    return (shift(0x8040201008040201, (pos % 8 - pos // 8) << 3) ^ 
+            shift(0x102040810204080, ((7 - pos // 8) - pos % 8) << 3)) & MAX
